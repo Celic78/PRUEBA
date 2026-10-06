@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('citas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('paciente_id')->constrained('users')->onDelete('cascade');
+            $table->date('fecha');
+            $table->enum('hora', ['10:00', '13:00', '16:00', '17:00']);
+            $table->enum('estado', ['pendiente', 'completada', 'cancelada'])->default('pendiente');
+            $table->text('notificacion_cancelacion')->nullable();
+            $table->timestamps();
+
+            $table->unique(['fecha', 'hora']);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('citas');
+    }
+};

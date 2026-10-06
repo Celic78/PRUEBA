@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --evergreen: #132a13;
+    --hunter-green: #31572c;
+    --fern: #4f772d;
+    --palm-leaf: #90a955;
+    --lime-cream: #ecf39e;
+
+    /* Tema Claro */
+    --bg-main: #f8faf6;
+    --bg-card: #ffffff;
+    --bg-sidebar: #132a13;
+    --text-primary: #132a13;
+    --text-secondary: #4f772d;
+    --text-muted: #6b7280;
+    --border-color: #d1e2c4;
+    --input-bg: #f3f7f0;
+    --accent: #31572c;
+    --accent-hover: #4f772d;
+    --sidebar-text: #ecf39e;
+}
+
+[data-theme="dark"] {
+    --bg-main: #0c180c;
+    --bg-card: #132a13;
+    --bg-sidebar: #091409;
+    --text-primary: #ecf39e;
+    --text-secondary: #90a955;
+    --text-muted: #a3b899;
+    --border-color: #31572c;
+    --input-bg: #1c381c;
+    --accent: #90a955;
+    --accent-hover: #ecf39e;
+    --sidebar-text: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, .font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* Layout Principal con Sidebar */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-sidebar);
+    color: var(--sidebar-text);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--lime-cream);
+    margin-bottom: 2.5rem;
+    display: block;
+    text-decoration: none;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.sidebar-link {
+    color: var(--sidebar-text);
+    text-decoration: none;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+    background-color: var(--hunter-green);
+    color: #ffffff;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* Header & Switcher */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.theme-toggle {
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Tarjetas y Contenedores */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Tablas Modernas */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Formularios */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: var(--palm-leaf);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.85rem 1.75rem;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--hunter-green);
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: var(--fern);
+}
+
+.btn-secondary {
+    background-color: var(--palm-leaf);
+    color: var(--evergreen);
+}
+
+.btn-danger {
+    background-color: #a83232;
+    color: #ffffff;
+}
+
+/* Vista Login basada en la referencia del diseño mockup */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--bg-card);
+    border: 2px solid var(--evergreen);
+    border-radius: 28px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+}
+
+.login-title-box {
+    border: 2px solid var(--evergreen);
+    border-radius: 20px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 2rem;
+    background-color: var(--bg-card);
+}
+
+.login-title-box h2 {
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.login-field-box {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.login-field-box label {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.login-input {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 18px;
+    border: 2px solid var(--evergreen);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    text-align: center;
+    outline: none;
+}
+
+.login-btn-box {
+    margin-top: 2rem;
+}
+
+.login-btn {
+    border: 2px solid var(--evergreen);
+    border-radius: 18px;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 0.75rem 2.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.login-btn:hover {
+    background-color: var(--lime-cream);
+    color: var(--evergreen);
+}
+
+/* Badge de Estado */
+.badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.badge-pendiente { background-color: #fef08a; color: #854d0e; }
+.badge-completada { background-color: #bbf7d0; color: #166534; }
+.badge-cancelada { background-color: #fecaca; color: #991b1b; }
