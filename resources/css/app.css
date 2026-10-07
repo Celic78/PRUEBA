@@ -1,310 +1,411 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --evergreen: #132a13;
-    --hunter-green: #31572c;
-    --fern: #4f772d;
-    --palm-leaf: #90a955;
-    --lime-cream: #ecf39e;
+    /* PALETA CLARA - Salvia, Bosque y Esmeralda */
+    --bg-salvia: #eaf0e8;
+    --bg-salvia-soft: #f2f6f1;
+    --bg-white: #ffffff;
+    --green-forest: #1b3823;
+    --green-emerald: #2e7d52;
+    --green-emerald-light: rgba(46, 125, 82, 0.12);
+    --green-olive: #3b4e3a;
+    --green-leaf: #4a7c59;
+    
+    --text-dark: #19291c;
+    --text-muted: #536957;
+    --border-soft: #d3dfd5;
+    --border-emerald: #2e7d52;
 
-    /* Tema Claro */
-    --bg-main: #f8faf6;
-    --bg-card: #ffffff;
-    --bg-sidebar: #132a13;
-    --text-primary: #132a13;
-    --text-secondary: #4f772d;
-    --text-muted: #6b7280;
-    --border-color: #d1e2c4;
-    --input-bg: #f3f7f0;
-    --accent: #31572c;
-    --accent-hover: #4f772d;
-    --sidebar-text: #ecf39e;
+    --radius-pill: 9999px;
+    --radius-card: 24px;
+    --shadow-clean: 0 12px 32px rgba(27, 56, 35, 0.05);
 }
 
+/* MODO OSCURO INTEGRADO */
 [data-theme="dark"] {
-    --bg-main: #0c180c;
-    --bg-card: #132a13;
-    --bg-sidebar: #091409;
-    --text-primary: #ecf39e;
-    --text-secondary: #90a955;
-    --text-muted: #a3b899;
-    --border-color: #31572c;
-    --input-bg: #1c381c;
-    --accent: #90a955;
-    --accent-hover: #ecf39e;
-    --sidebar-text: #ffffff;
+    --bg-salvia: #0c180e;
+    --bg-salvia-soft: #122215;
+    --bg-white: #172a1b;
+    --green-forest: #e2ede4;
+    --green-emerald: #43a047;
+    --green-emerald-light: rgba(67, 160, 71, 0.2);
+    --green-olive: #1c3020;
+    --green-leaf: #66bb6a;
+    
+    --text-dark: #e8f2e9;
+    --text-muted: #8ea893;
+    --border-soft: #233d27;
+    --border-emerald: #43a047;
+
+    --shadow-clean: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-h1, h2, h3, .font-playfair {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
-    background-color: var(--bg-main);
-    color: var(--text-primary);
+    background-color: var(--bg-salvia);
+    color: var(--text-dark);
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
 }
 
-/* Layout Principal con Sidebar */
-.app-container {
-    display: flex;
-    min-height: 100vh;
+/* FORMAS BOTÁNICAS Y ORGANICAS EN ESQUINAS INFERIORES */
+.botanical-bg-bottom-left {
+    position: fixed;
+    bottom: -40px;
+    left: -40px;
+    width: 280px;
+    height: 280px;
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 0;
 }
 
-.sidebar {
-    width: 260px;
-    background-color: var(--bg-sidebar);
-    color: var(--sidebar-text);
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.botanical-bg-bottom-right {
+    position: fixed;
+    bottom: -50px;
+    right: -50px;
+    width: 320px;
+    height: 320px;
+    pointer-events: none;
+    opacity: 0.25;
+    z-index: 0;
 }
 
-.sidebar-brand {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--lime-cream);
-    margin-bottom: 2.5rem;
-    display: block;
-    text-decoration: none;
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.sidebar-link {
-    color: var(--sidebar-text);
-    text-decoration: none;
-    padding: 0.85rem 1rem;
-    border-radius: 12px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.sidebar-link:hover, .sidebar-link.active {
-    background-color: var(--hunter-green);
-    color: #ffffff;
-}
-
-.main-content {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-}
-
-/* Header & Switcher */
-.header-top {
+/* NAVEGACIÓN LIMPIA */
+.navbar {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.8rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
 }
 
-.theme-toggle {
-    background: var(--input-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
-/* Tarjetas y Contenedores */
-.card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 1.75rem;
-    margin-bottom: 1.5rem;
-}
-
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-/* Tablas Modernas */
-.table-container {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-th, td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border-color);
-}
-
-th {
-    color: var(--text-secondary);
-    font-weight: 600;
-}
-
-/* Formularios */
-.form-group {
-    margin-bottom: 1.25rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-primary);
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.85rem 1rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    background-color: var(--input-bg);
-    color: var(--text-primary);
-    font-size: 1rem;
-    outline: none;
-}
-
-.form-control:focus {
-    border-color: var(--palm-leaf);
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.85rem 1.75rem;
-    border-radius: 12px;
-    border: none;
-    background-color: var(--hunter-green);
-    color: #ffffff;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-}
-
-.btn:hover {
-    background-color: var(--fern);
-}
-
-.btn-secondary {
-    background-color: var(--palm-leaf);
-    color: var(--evergreen);
-}
-
-.btn-danger {
-    background-color: #a83232;
-    color: #ffffff;
-}
-
-/* Vista Login basada en la referencia del diseño mockup */
-.login-wrapper {
-    min-height: 100vh;
+.logo-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-soft);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    color: var(--green-leaf);
+    box-shadow: var(--shadow-clean);
 }
 
-.login-card {
+.brand-text h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--green-forest);
+    line-height: 1;
+}
+
+.brand-text p {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-top: 0.25rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    padding-bottom: 0.3rem;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    max-width: 480px;
-    background-color: var(--bg-card);
-    border: 2px solid var(--evergreen);
-    border-radius: 28px;
-    padding: 2.5rem 2rem;
-    text-align: center;
+    height: 2.5px;
+    background-color: var(--green-leaf);
+    border-radius: var(--radius-pill);
 }
 
-.login-title-box {
-    border: 2px solid var(--evergreen);
-    border-radius: 20px;
-    padding: 0.75rem 1rem;
-    margin-bottom: 2rem;
-    background-color: var(--bg-card);
-}
-
-.login-title-box h2 {
-    font-size: 1.25rem;
-    letter-spacing: 2px;
-    color: var(--text-primary);
-    text-transform: uppercase;
-}
-
-.login-field-box {
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.login-field-box label {
-    display: block;
+/* BOTONES OVALADOS (PILL) */
+.btn-pill-solid {
+    background-color: var(--green-forest);
+    color: #ffffff !important;
+    border: none;
+    padding: 0.85rem 2.2rem;
+    border-radius: var(--radius-pill);
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.login-input {
-    width: 100%;
-    padding: 0.9rem;
-    border-radius: 18px;
-    border: 2px solid var(--evergreen);
-    background-color: var(--bg-card);
-    color: var(--text-primary);
+.btn-pill-solid:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.btn-pill-outline {
+    background-color: transparent;
+    color: var(--green-forest) !important;
+    border: 2px solid var(--green-forest);
+    padding: 0.8rem 2rem;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-pill-outline:hover {
+    background-color: var(--bg-white);
+}
+
+.theme-switch-btn {
+    background-color: var(--bg-white);
+    color: var(--green-forest);
+    border: 1px solid var(--border-soft);
+    padding: 0.65rem 1.3rem;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* HERO LANDING */
+.hero-wrapper {
+    max-width: 1280px;
+    margin: 2.5rem auto 5rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+}
+
+.badge-tag {
+    display: inline-block;
+    background-color: var(--bg-white);
+    color: var(--green-leaf);
+    border: 1px solid var(--border-soft);
+    padding: 0.4rem 1.2rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: 3.4rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--green-forest);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-description {
     font-size: 1.1rem;
-    text-align: center;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+/* COLUMNA DERECHA DE DATOS DE SALUD */
+.health-data-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.data-card-item {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: var(--shadow-clean);
+}
+
+.icon-circle-green {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-salvia-soft);
+    color: var(--green-emerald);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.data-card-info h4 {
+    color: var(--green-forest);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.data-card-info p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* ==========================================
+   ESTILO LOGIN (DOS COLUMNAS & CAMPOS ESPECIALES)
+   ========================================== */
+.login-page-wrapper {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-split-card {
+    max-width: 960px;
+    width: 100%;
+    background-color: var(--bg-white);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-clean);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+}
+
+/* Lado Izquierdo: Verde Olivo con Frase Motivacional */
+.login-left-olive {
+    background-color: var(--green-olive);
+    color: #ffffff;
+    padding: 3.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-left-olive h3 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1.35;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.login-left-olive p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Lado Derecho: Formulario con mitad de fondo verde esmeralda */
+.login-right-form {
+    padding: 3.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-right-form h2 {
+    font-size: 1.8rem;
+    color: var(--green-forest);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.login-right-form subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.form-group-custom {
+    margin-bottom: 1.8rem;
+}
+
+.form-group-custom label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--green-forest);
+    margin-bottom: 0.5rem;
+}
+
+/* Campo contorneado con mitad de fondo verde esmeralda */
+.input-emerald-half {
+    width: 100%;
+    padding: 1rem 1.4rem;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border-emerald);
+    background: linear-gradient(90deg, var(--green-emerald-light) 50%, var(--bg-white) 50%);
+    color: var(--text-dark);
+    font-size: 0.95rem;
     outline: none;
 }
 
-.login-btn-box {
-    margin-top: 2rem;
+.input-emerald-half:focus {
+    box-shadow: 0 0 0 3px var(--green-emerald-light);
 }
 
-.login-btn {
-    border: 2px solid var(--evergreen);
-    border-radius: 18px;
-    background-color: var(--bg-card);
-    color: var(--text-primary);
-    font-weight: 700;
-    letter-spacing: 2px;
-    padding: 0.75rem 2.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    text-transform: uppercase;
+/* AGENDA DE CITAS MINIMALISTA */
+.appointment-card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-card);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-clean);
+    max-width: 600px;
+    margin: 2rem auto;
 }
 
-.login-btn:hover {
-    background-color: var(--lime-cream);
-    color: var(--evergreen);
+.appointment-card h2 {
+    color: var(--green-forest);
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
 }
-
-/* Badge de Estado */
-.badge {
-    padding: 0.35rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-.badge-pendiente { background-color: #fef08a; color: #854d0e; }
-.badge-completada { background-color: #bbf7d0; color: #166534; }
-.badge-cancelada { background-color: #fecaca; color: #991b1b; }
